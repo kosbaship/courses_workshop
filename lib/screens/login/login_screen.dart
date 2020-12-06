@@ -1,3 +1,4 @@
+import 'package:courses_workshop/screens/register/register_screen.dart';
 import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:courses_workshop/shared/components/components.dart';
 import 'package:flutter/cupertino.dart';
@@ -59,7 +60,7 @@ class LoginScreen extends StatelessWidget {
             ),
             defaultButton(
                 onPressed: (){
-                  // navigateTo(context, RegisterScreen());
+                  navigateTo(context, RegisterScreen());
                 },
                 text: 'sign up',
                 textColor:kPrimaryColor ,

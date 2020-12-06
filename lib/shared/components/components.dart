@@ -9,7 +9,7 @@ Widget defaultButton ({
   Color borderColor = kPrimaryTextColor,
 }) => Container(
   width: double.infinity,
-  height: 48.0,
+  height: 58.0,
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(50),
     color: backgroundColor,
@@ -24,7 +24,7 @@ Widget defaultButton ({
     child: Text(
       text.toUpperCase(),
       style: TextStyle(
-          fontSize: 26
+          fontSize: 24
       ),
     ),
   ),
