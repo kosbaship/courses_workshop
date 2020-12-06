@@ -9,6 +9,7 @@ class LoginScreen extends StatelessWidget {
   var passwordController = TextEditingController();
 
 
+  var myKey = GlobalKey<ScaffoldMessengerState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +21,8 @@ class LoginScreen extends StatelessWidget {
     ),
     centerTitle: true,
     ),
-    body: SingleChildScrollView(
+    key: myKey,
+      body: SingleChildScrollView(
       child: Padding(
         padding: EdgeInsetsDirectional.only(
           start: 16.0,
@@ -52,6 +54,9 @@ class LoginScreen extends StatelessWidget {
             defaultButton(
                 onPressed: (){
                   // navigateTo(context, LoginScreen());
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('Your account is Logged in Successfully'),
+                  ));
                 },
                 text: 'login'
             ),

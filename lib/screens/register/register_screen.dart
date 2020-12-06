@@ -2,14 +2,12 @@ import 'package:courses_workshop/screens/login/login_screen.dart';
 import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:courses_workshop/shared/components/components.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatelessWidget {
   var emailController = TextEditingController();
   var firstNameController = TextEditingController();
   var lastNameController = TextEditingController();
   var passwordController = TextEditingController();
-
 
 
   @override
@@ -33,7 +31,6 @@ class RegisterScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
                 defaultTextFormField(
                     title: 'First Name',
                     hint: 'Adel',
@@ -72,8 +69,9 @@ class RegisterScreen extends StatelessWidget {
                 ),
                 defaultButton(
                     onPressed: (){
-                      // navigateTo(context, LoginScreen());
-
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Your account is registered Successfully'),
+                      ));
                     },
                     text: 'sign up'
                 ),
