@@ -29,17 +29,65 @@ Widget defaultButton ({
     ),
   ),
 );
-
+// =========================== defaultTextFormField
+Widget defaultTextFormField (
+      {
+        String title = "title",
+        String hint = '',
+        @required TextEditingController controller,
+        @required TextInputType type,
+      }) =>  Container(
+  padding: EdgeInsetsDirectional.only(
+    start: 12.0,
+    end: 8.0,
+    top: 8.0,
+  ),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(12),
+    color: kPrimaryTextColor,
+  ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            quickCustomText(text: title,
+            ),
+            TextFormField(
+              controller: controller,
+              keyboardType: type,
+              decoration: InputDecoration(
+                hintText: hint,
+                border: InputBorder.none,
+              ),
+            ),
+          ],
+        ),
+);
+// =========================== logo
+Widget logo() => Column(
+  children: [
+    SizedBox(
+      height: 40.0,
+    ),
+    Image.asset("assets/images/logo_learn.png",
+      color: kPrimaryColor,
+    ),
+    SizedBox(
+      height: 40.0,
+    ),
+  ],
+);
 // =========================== quickCustomText
 Widget quickCustomText({
     @required String text,
      double fontSize = 20.0,
      Color color = kDefaultTextColor,
+    FontWeight fontWeight = FontWeight.normal,
     })=> Text(
     text,
   style: TextStyle(
       color: color,
-      fontSize: fontSize
+      fontSize: fontSize,
+      fontWeight: FontWeight.normal
   ),
 );
 
@@ -48,7 +96,7 @@ Widget headerText({
   @required String text,
   double fontSize = 38.0,
 })=> Padding(
-  padding: const EdgeInsets.all(32.0),
+  padding: const EdgeInsets.all(16.0),
   child:   Text(
     text,
     style: TextStyle(

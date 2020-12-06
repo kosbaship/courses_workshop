@@ -27,16 +27,8 @@ class WelcomeScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              SizedBox(
-                height: 30.0,
-              ),
-              headerText( text: "Welcome",),
-              Image.asset("assets/images/logo_learn.png",
-                color: kPrimaryColor,
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
+              headerText(text: "Welcome"),
+              logo(),
               defaultButton(
                   onPressed: (){
                     navigateTo(context, LoginScreen());
@@ -91,7 +83,10 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
             ],
           ),
         ),

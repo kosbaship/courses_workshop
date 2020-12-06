@@ -13,10 +13,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Courses',
       theme: ThemeData(
+        scaffoldBackgroundColor: kPrimaryBackgroundColor,
         primarySwatch: kPrimaryColor,
       ),
       home: WelcomeScreen(),
-
     );
   }
 }
