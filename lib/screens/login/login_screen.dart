@@ -65,7 +65,7 @@ class LoginScreen extends StatelessWidget {
             ),
             defaultButton(
                 onPressed: (){
-                  navigateTo(context, RegisterScreen());
+                  navigateToAndClose(context, RegisterScreen());
                 },
                 text: 'sign up',
                 textColor:kPrimaryColor ,

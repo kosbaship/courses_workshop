@@ -111,3 +111,9 @@ void navigateTo(context, widget) =>
       context,
       MaterialPageRoute(builder: (context) => widget,),
 );
+// =========================== navigateTo
+void navigateToAndClose(context, widget) =>
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => widget,),
+    );

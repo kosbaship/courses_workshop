@@ -80,7 +80,7 @@ class RegisterScreen extends StatelessWidget {
                 ),
                 defaultButton(
                     onPressed: (){
-                      navigateTo(context, LoginScreen());
+                      navigateToAndClose(context, LoginScreen());
                     },
                     text: 'login',
                     textColor:kPrimaryColor ,

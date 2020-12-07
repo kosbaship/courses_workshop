@@ -31,7 +31,7 @@ class WelcomeScreen extends StatelessWidget {
               logo(),
               defaultButton(
                   onPressed: (){
-                    navigateTo(context, LoginScreen());
+                    navigateToAndClose(context, LoginScreen());
                   },
                   text: 'login'
               ),
@@ -40,7 +40,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
               defaultButton(
                   onPressed: (){
-                    navigateTo(context, RegisterScreen());
+                    navigateToAndClose(context, RegisterScreen());
                   },
                   text: 'sign up',
                   textColor:kPrimaryColor ,
