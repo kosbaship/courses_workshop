@@ -1,3 +1,4 @@
+import 'package:courses_workshop/screens/forget_password/forget_password_screen.dart';
 import 'package:courses_workshop/screens/register/register_screen.dart';
 import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:courses_workshop/shared/components/components.dart';
@@ -9,7 +10,6 @@ class LoginScreen extends StatelessWidget {
   var passwordController = TextEditingController();
 
 
-  var myKey = GlobalKey<ScaffoldMessengerState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,6 @@ class LoginScreen extends StatelessWidget {
     ),
     centerTitle: true,
     ),
-    key: myKey,
       body: SingleChildScrollView(
       child: Padding(
         padding: EdgeInsetsDirectional.only(
@@ -76,7 +75,9 @@ class LoginScreen extends StatelessWidget {
               height: 20.0,
             ),
             InkWell(
-              onTap: (){},
+              onTap: (){
+                navigateTo(context, ForgetPasswordScreen());
+              },
               child: quickCustomText(
                 text: "Forget Password .. ?",
               ),

@@ -1,3 +1,4 @@
+import 'package:courses_workshop/screens/forget_password/forget_password_screen.dart';
 import 'package:courses_workshop/screens/login/login_screen.dart';
 import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:courses_workshop/shared/components/components.dart';
@@ -91,7 +92,9 @@ class RegisterScreen extends StatelessWidget {
                   height: 20.0,
                 ),
                 InkWell(
-                  onTap: (){},
+                  onTap: (){
+                    navigateTo(context, ForgetPasswordScreen());
+                  },
                   child: quickCustomText(
                     text: "Forget your password .. ?",
                   ),
