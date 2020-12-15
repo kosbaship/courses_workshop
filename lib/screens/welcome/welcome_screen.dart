@@ -4,6 +4,7 @@ import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:courses_workshop/shared/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+
 class WelcomeScreen extends StatelessWidget {
   static const String id = 'welcome';
 
@@ -12,10 +13,7 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: quickCustomText(
-          text: "Courses",
-          fontSize: 30,
-          color: kPrimaryTextColor
-        ),
+            text: "Courses", fontSize: 30, color: kPrimaryTextColor),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -27,31 +25,31 @@ class WelcomeScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              headerText(text: "Welcome"),
+              headerText(
+                text: "Welcome",
+              ),
               logo(),
               defaultButton(
-                  onPressed: (){
-                    navigateToAndClose(context, LoginScreen());
+                  onPressed: () {
+                    navigateToAndCloseCurrent(context, LoginScreen());
                   },
-                  text: 'login'
-              ),
+                  text: 'login'),
               SizedBox(
                 height: 20.0,
               ),
               defaultButton(
-                  onPressed: (){
-                    navigateToAndClose(context, RegisterScreen());
+                  onPressed: () {
+                    navigateToAndCloseCurrent(context, RegisterScreen());
                   },
                   text: 'sign up',
-                  textColor:kPrimaryColor ,
-                borderColor: kPrimaryColor,
-                backgroundColor: kPrimaryTextColor
-              ),
+                  textColor: kPrimaryColor,
+                  borderColor: kPrimaryColor,
+                  backgroundColor: kPrimaryTextColor),
               SizedBox(
                 height: 20.0,
               ),
               quickCustomText(
-                  text: "Or Login with",
+                text: "Or Login with",
               ),
               SizedBox(
                 height: 20.0,
