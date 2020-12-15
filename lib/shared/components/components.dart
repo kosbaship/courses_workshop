@@ -125,3 +125,27 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
       builder: (context) => widget,
     ),
     (Route<dynamic> route) => false);
+
+// =========================== buildProgress
+void buildProgress({
+  context,
+  text,
+}) =>
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Row(
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(
+              width: 20.0,
+            ),
+            Expanded(
+              child: Text(
+                text,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );

@@ -4,6 +4,8 @@ import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'shared/network/remote/dio_helper.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -11,6 +13,9 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // create the database instance
+    DioHelper();
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => RegisterCubit()),

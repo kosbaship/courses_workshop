@@ -1,3 +1,4 @@
+import 'package:courses_workshop/layout/home_screen.dart';
 import 'package:courses_workshop/screens/forget_password/forget_password_screen.dart';
 import 'package:courses_workshop/screens/login/login_screen.dart';
 import 'package:courses_workshop/screens/register/cubit/cubit.dart';
@@ -8,15 +9,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterScreen extends StatelessWidget {
-  var emailController = TextEditingController();
   var firstNameController = TextEditingController();
   var lastNameController = TextEditingController();
+  var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var cityController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegisterStates>(
-      listener: (BuildContext context, state) {},
+      listener: (BuildContext context, state) {
+        if (state is RegisterStateLoading) {
+          buildProgress(
+            context: context,
+            text: 'please wait ...',
+          );
+        }
+
+        if (state is RegisterStateSuccess) {
+          navigateAndFinish(
+            context,
+            HomeScreen(),
+          );
+        }
+
+        if (state is RegisterStateError) {
+          buildProgress(
+            context: context,
+            text: state.error.toString(),
+          );
+        }
+      },
       builder: (BuildContext context, state) {
         return Scaffold(
             appBar: AppBar(
@@ -38,7 +61,7 @@ class RegisterScreen extends StatelessWidget {
                         title: 'First Name',
                         hint: 'Adel',
                         controller: firstNameController,
-                        type: TextInputType.emailAddress),
+                        type: TextInputType.name),
                     SizedBox(
                       height: 20.0,
                     ),
@@ -46,7 +69,7 @@ class RegisterScreen extends StatelessWidget {
                         title: 'Last Name',
                         hint: 'Adham',
                         controller: lastNameController,
-                        type: TextInputType.emailAddress),
+                        type: TextInputType.name),
                     SizedBox(
                       height: 20.0,
                     ),
@@ -66,12 +89,26 @@ class RegisterScreen extends StatelessWidget {
                     SizedBox(
                       height: 20.0,
                     ),
+                    defaultTextFormField(
+                        title: 'City',
+                        hint: 'Aswan',
+                        controller: cityController,
+                        type: TextInputType.name),
+                    SizedBox(
+                      height: 20.0,
+                    ),
                     defaultButton(
                         onPressed: () {
-                          RegisterCubit.get(context).postData();
+                          RegisterCubit.get(context).register(
+                            first: firstNameController.text,
+                            last: lastNameController.text,
+                            email: emailController.text,
+                            password: passwordController.text,
+                            city: cityController.text,
+                          );
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content:
-                                Text('Your account is registered Successfully'),
+                                Text('Your account is ${emailController.text}'),
                           ));
                         },
                         text: 'sign up'),
