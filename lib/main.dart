@@ -1,4 +1,5 @@
-import 'package:courses_workshop/screens/register/cubit/cubit.dart';
+import 'package:courses_workshop/screens/login/cubit/login_cubit.dart';
+import 'package:courses_workshop/screens/register/cubit/register_cubit.dart';
 import 'package:courses_workshop/screens/welcome/welcome_screen.dart';
 import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => RegisterCubit()),
+        BlocProvider(create: (context) => LoginCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

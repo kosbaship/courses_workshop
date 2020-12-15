@@ -1,8 +1,8 @@
 import 'package:courses_workshop/layout/home_screen.dart';
 import 'package:courses_workshop/screens/forget_password/forget_password_screen.dart';
 import 'package:courses_workshop/screens/login/login_screen.dart';
-import 'package:courses_workshop/screens/register/cubit/cubit.dart';
-import 'package:courses_workshop/screens/register/cubit/states.dart';
+import 'package:courses_workshop/screens/register/cubit/register_cubit.dart';
+import 'package:courses_workshop/screens/register/cubit/register_states.dart';
 import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:courses_workshop/shared/components/components.dart';
 import 'package:flutter/material.dart';
