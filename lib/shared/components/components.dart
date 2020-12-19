@@ -1,13 +1,14 @@
 import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 // =========================== defaultButton
 Widget defaultButton({
   @required Function onPressed,
   @required String text,
-  Color textColor = kPrimaryTextColor,
-  Color backgroundColor = kPrimaryColor,
-  Color borderColor = kPrimaryTextColor,
+  Color textColor = kWhiteColor,
+  Color backgroundColor = kLightishPurpleColor,
+  Color borderColor = kLightishPurpleColor,
 }) =>
     Container(
       width: double.infinity,
@@ -24,12 +25,16 @@ Widget defaultButton({
         onPressed: onPressed,
         child: Text(
           text.toUpperCase(),
-          style: TextStyle(fontSize: 24),
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.normal,
+            fontFamily: "MontserratRegular",
+          ),
         ),
       ),
     );
 // =========================== defaultTextFormField
-Widget defaultTextFormField({
+Widget defaultTextField({
   String title = "title",
   String hint = '',
   @required TextEditingController controller,
@@ -37,24 +42,35 @@ Widget defaultTextFormField({
 }) =>
     Container(
       padding: EdgeInsetsDirectional.only(
-        start: 12.0,
-        end: 8.0,
-        top: 8.0,
+        start: 16.0,
+        end: 16.0,
+        top: 12.0,
       ),
       decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 3,
+            blurRadius: 3,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
         borderRadius: BorderRadius.circular(12),
-        color: kPrimaryTextColor,
+        color: kWhiteColor,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           quickCustomText(
             text: title,
+            fontSize: 12,
+            color: kDarkColor,
           ),
           TextFormField(
             controller: controller,
             keyboardType: type,
             decoration: InputDecoration(
+              hintStyle: TextStyle(fontSize: 16.0, color: kGreyColor),
               hintText: hint,
               border: InputBorder.none,
             ),
@@ -66,42 +82,56 @@ Widget defaultTextFormField({
 Widget logo() => Column(
       children: [
         SizedBox(
-          height: 40.0,
+          height: 25.0,
         ),
         Image.asset(
           "assets/images/logo_learn.png",
-          color: kPrimaryColor,
+          color: kLightishPurpleColor,
         ),
         SizedBox(
-          height: 40.0,
+          height: 60.0,
         ),
       ],
     );
 // =========================== quickCustomText
-Widget quickCustomText({
-  @required String text,
-  double fontSize = 20.0,
-  Color color = kDefaultTextColor,
-  FontWeight fontWeight = FontWeight.normal,
-}) =>
+Widget quickCustomText(
+        {@required String text,
+        double fontSize = 16.0,
+        Color color = kDarkColor,
+        FontWeight fontWeight = FontWeight.normal,
+        TextAlign textAlign = TextAlign.center}) =>
     Text(
       text,
+      textAlign: textAlign,
       style: TextStyle(
-          color: color, fontSize: fontSize, fontWeight: FontWeight.normal),
+        color: color,
+        fontSize: fontSize,
+        fontWeight: FontWeight.normal,
+        fontFamily: "MontserratRegular",
+      ),
     );
 
 // =========================== headerText
 Widget headerText({
   @required String text,
-  double fontSize = 38.0,
-  Color fontColor = kPrimaryTextColor,
+  double fontSize = 32.0,
+  Color fontColor = kLightishPurpleColor,
 }) =>
-    Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Text(
-        text,
-        style: TextStyle(fontSize: fontSize, color: fontColor),
-      ),
+    Column(
+      children: [
+        SizedBox(
+          height: 80.0,
+        ),
+        Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: fontSize,
+            color: fontColor,
+            fontFamily: "MontserratRegular",
+          ),
+        ),
+      ],
     );
 
 // =========================== navigate To
@@ -147,5 +177,27 @@ void buildProgress({
             ),
           ],
         ),
+      ),
+    );
+// ============================ Back ButtonBar
+Widget backButton(context) => Padding(
+      padding: EdgeInsetsDirectional.only(start: 6.0),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 4.0,
+          ),
+          IconButton(
+            padding: EdgeInsetsDirectional.only(start: 0.0),
+            onPressed: () => Navigator.of(context).pop(),
+            icon: Icon(
+              Icons.keyboard_arrow_left,
+              size: 40,
+            ),
+          ),
+          SizedBox(
+            height: 15.0,
+          ),
+        ],
       ),
     );

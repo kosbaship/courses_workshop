@@ -11,81 +11,78 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: quickCustomText(
-            text: "Courses", fontSize: 30, color: kPrimaryTextColor),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsetsDirectional.only(
-            start: 16.0,
-            end: 16.0,
-            top: 16.0,
-          ),
-          child: Column(
-            children: [
-              headerText(
-                text: "Welcome",
-              ),
-              logo(),
-              defaultButton(
-                  onPressed: () {
-                    navigateToAndCloseCurrent(context, LoginScreen());
-                  },
-                  text: 'login'),
-              SizedBox(
-                height: 20.0,
-              ),
-              defaultButton(
-                  onPressed: () {
-                    navigateToAndCloseCurrent(context, RegisterScreen());
-                  },
-                  text: 'sign up',
-                  textColor: kPrimaryColor,
-                  borderColor: kPrimaryColor,
-                  backgroundColor: kPrimaryTextColor),
-              SizedBox(
-                height: 20.0,
-              ),
-              quickCustomText(
-                text: "Or Login with",
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 25,
-                    backgroundColor: kPrimaryColor,
-                    child: Image(
-                      image: AssetImage('assets/images/google.png'),
-                      height: 25.0,
-                      width: 25.0,
-                      color: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsetsDirectional.only(
+              start: 20.0,
+              end: 20.0,
+              top: 16.0,
+            ),
+            child: Column(
+              children: [
+                headerText(
+                  text: "Welcome to Courses",
+                ),
+                logo(),
+                defaultButton(
+                    onPressed: () {
+                      navigateToAndCloseCurrent(context, LoginScreen());
+                    },
+                    text: 'login'),
+                SizedBox(
+                  height: 25.0,
+                ),
+                defaultButton(
+                    onPressed: () {
+                      navigateToAndCloseCurrent(context, RegisterScreen());
+                    },
+                    text: 'sign up',
+                    textColor: kLightishPurpleColor,
+                    borderColor: kLightishPurpleColor,
+                    backgroundColor: kPaleLilacColor),
+                SizedBox(
+                  height: 25.0,
+                ),
+                quickCustomText(
+                  text: "Or Login with",
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundColor: kLightishPurpleColor,
+                      child: Image(
+                        image: AssetImage('assets/images/google.png'),
+                        height: 25.0,
+                        width: 25.0,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 30.0,
-                  ),
-                  CircleAvatar(
-                    radius: 25,
-                    backgroundColor: kPrimaryColor,
-                    child: Image(
-                      image: AssetImage('assets/images/facebook.png'),
-                      height: 25.0,
-                      width: 25.0,
-                      color: Colors.white,
+                    SizedBox(
+                      width: 30.0,
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-            ],
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundColor: kLightishPurpleColor,
+                      child: Image(
+                        image: AssetImage('assets/images/facebook.png'),
+                        height: 25.0,
+                        width: 25.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -39,80 +39,85 @@ class LoginScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-            appBar: AppBar(
-              title: quickCustomText(
-                  text: "Login", fontSize: 30, color: kPrimaryTextColor),
-              centerTitle: true,
-            ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsetsDirectional.only(
-                  start: 16.0,
-                  end: 16.0,
-                  top: 16.0,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    logo(),
-                    defaultTextFormField(
-                        title: 'email',
-                        hint: 'example@google.com',
-                        controller: emailController,
-                        type: TextInputType.emailAddress),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    defaultTextFormField(
-                        title: 'password',
-                        hint: '***************',
-                        controller: passwordController,
-                        type: TextInputType.visiblePassword),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    defaultButton(
-                        onPressed: () {
-                          // navigateTo(context, LoginScreen());
-                          LoginCubit.get(context).login(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content:
-                                Text('${emailController.text} Successfully'),
-                          ));
-                        },
-                        text: 'login'),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    defaultButton(
-                        onPressed: () {
-                          navigateToAndCloseCurrent(context, RegisterScreen());
-                        },
-                        text: 'sign up',
-                        textColor: kPrimaryColor,
-                        borderColor: kPrimaryColor,
-                        backgroundColor: kPrimaryTextColor),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        navigateTo(context, ForgetPasswordScreen());
+            body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsetsDirectional.only(
+                start: 20.0,
+                end: 20.0,
+                top: 16.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 40.0,
+                  ),
+                  quickCustomText(
+                    text: "Login",
+                    fontSize: 28.0,
+                  ),
+                  SizedBox(
+                    height: 240.0,
+                  ),
+                  defaultTextField(
+                      title: 'Email',
+                      hint: 'Sarahsmith@gmail.com',
+                      controller: emailController,
+                      type: TextInputType.emailAddress),
+                  SizedBox(
+                    height: 40.0,
+                  ),
+                  defaultTextField(
+                      title: 'Password',
+                      hint: '***************',
+                      controller: passwordController,
+                      type: TextInputType.visiblePassword),
+                  SizedBox(
+                    height: 60.0,
+                  ),
+                  defaultButton(
+                      onPressed: () {
+                        // navigateTo(context, LoginScreen());
+                        LoginCubit.get(context).login(
+                          email: emailController.text,
+                          password: passwordController.text,
+                        );
                       },
+                      text: 'login'),
+                  SizedBox(
+                    height: 25.0,
+                  ),
+                  defaultButton(
+                      onPressed: () {
+                        navigateToAndCloseCurrent(context, RegisterScreen());
+                      },
+                      text: 'sign up',
+                      textColor: kLightishPurpleColor,
+                      borderColor: kLightishPurpleColor,
+                      backgroundColor: kPaleLilacColor),
+                  SizedBox(
+                    height: 35.0,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      navigateTo(context, ForgetPasswordScreen());
+                    },
+                    child: Container(
+                      width: double.infinity,
                       child: quickCustomText(
                         text: "Forget Password .. ?",
                       ),
                     ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 25.0,
+                  ),
+                ],
               ),
-            ));
+            ),
+          ),
+        ));
       },
     );
   }
