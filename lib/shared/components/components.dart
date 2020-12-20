@@ -1,15 +1,15 @@
 import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 // =========================== defaultButton
-Widget defaultButton({
-  @required Function onPressed,
-  @required String text,
-  Color textColor = kWhiteColor,
-  Color backgroundColor = kLightishPurpleColor,
-  Color borderColor = kLightishPurpleColor,
-}) =>
+Widget defaultButton(
+        {@required Function onPressed,
+        @required String text,
+        Color textColor = kWhiteColor,
+        Color backgroundColor = kLightishPurpleColor,
+        Color borderColor = kLightishPurpleColor}) =>
     Container(
       width: double.infinity,
       height: 58.0,
@@ -39,6 +39,7 @@ Widget defaultTextField({
   String hint = '',
   @required TextEditingController controller,
   @required TextInputType type,
+  bool isPassword = false,
 }) =>
     Container(
       padding: EdgeInsetsDirectional.only(
@@ -69,6 +70,7 @@ Widget defaultTextField({
           TextFormField(
             controller: controller,
             keyboardType: type,
+            obscureText: isPassword,
             decoration: InputDecoration(
               hintStyle: TextStyle(fontSize: 16.0, color: kGreyColor),
               hintText: hint,
@@ -112,11 +114,10 @@ Widget quickCustomText(
     );
 
 // =========================== headerText
-Widget headerText({
-  @required String text,
-  double fontSize = 32.0,
-  Color fontColor = kLightishPurpleColor,
-}) =>
+Widget headerText(
+        {@required String text,
+        double fontSize = 32.0,
+        Color fontColor = kLightishPurpleColor}) =>
     Column(
       children: [
         SizedBox(
@@ -157,24 +158,32 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
     (Route<dynamic> route) => false);
 
 // =========================== buildProgress
-void buildProgress({
-  context,
-  text,
-}) =>
-    showDialog(
+void buildProgress({context, text, error = false}) => showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        content: Row(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            CircularProgressIndicator(),
-            SizedBox(
-              width: 20.0,
+            Row(
+              children: [
+                if (!error) CircularProgressIndicator(),
+                if (!error)
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                Expanded(
+                  child: Text(
+                    text,
+                  ),
+                ),
+              ],
             ),
-            Expanded(
-              child: Text(
-                text,
+            if (error) SizedBox(height: 20.0),
+            if (error)
+              defaultButton(
+                onPressed: () => Navigator.pop(context),
+                text: "Cancel",
               ),
-            ),
           ],
         ),
       ),
@@ -201,3 +210,13 @@ Widget backButton(context) => Padding(
         ],
       ),
     );
+// ============================ flutter toast
+showToast({@required String message, @required bool error}) =>
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: error ? Colors.red : Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0);

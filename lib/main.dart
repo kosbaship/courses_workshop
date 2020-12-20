@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Courses',
         theme: ThemeData(
-          scaffoldBackgroundColor: kPaleLilacColor,
-          primaryColor: kLightishPurpleColor,
-        ),
+            scaffoldBackgroundColor: kPaleLilacColor,
+            primaryColor: kLightishPurpleColor,
+            accentColor: kLightishPurpleColor),
         home: WelcomeScreen(),
       ),
     );

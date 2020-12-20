@@ -1,4 +1,3 @@
-import 'package:courses_workshop/layout/home_screen.dart';
 import 'package:courses_workshop/screens/forget_password/forget_password_screen.dart';
 import 'package:courses_workshop/screens/login/login_screen.dart';
 import 'package:courses_workshop/screens/register/cubit/register_cubit.dart';
@@ -27,16 +26,24 @@ class RegisterScreen extends StatelessWidget {
         }
 
         if (state is RegisterStateSuccess) {
+          // close the progress dialog in the last state
+          Navigator.pop(context);
           navigateAndFinish(
             context,
-            HomeScreen(),
+            LoginScreen(
+              email: emailController.text,
+              password: emailController.text,
+            ),
           );
         }
 
         if (state is RegisterStateError) {
+          // close the progress dialog in the last state
+          Navigator.pop(context);
           buildProgress(
             context: context,
-            text: state.error.toString(),
+            text: "this account is already exist",
+            error: true,
           );
         }
       },
@@ -90,6 +97,7 @@ class RegisterScreen extends StatelessWidget {
                       title: 'Password',
                       hint: '***************',
                       controller: passwordController,
+                      isPassword: true,
                       type: TextInputType.visiblePassword),
                   SizedBox(
                     height: 20.0,
@@ -104,17 +112,33 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   defaultButton(
                       onPressed: () {
-                        RegisterCubit.get(context).register(
-                          first: firstNameController.text,
-                          last: lastNameController.text,
-                          email: emailController.text,
-                          password: passwordController.text,
-                          city: cityController.text,
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content:
-                              Text('Your account is ${emailController.text}'),
-                        ));
+                        // save data for validation
+                        String first = firstNameController.text;
+                        String last = lastNameController.text;
+                        String email = emailController.text;
+                        String password = passwordController.text;
+                        String city = cityController.text;
+
+                        // checks if any field empty
+                        if (first.isEmpty ||
+                            last.isEmpty ||
+                            email.isEmpty ||
+                            password.isEmpty ||
+                            city.isEmpty) {
+                          // show toast
+                          showToast(
+                              message: "please enter a valid data",
+                              error: true);
+                        } else {
+                          // register the user
+                          RegisterCubit.get(context).register(
+                            first: first,
+                            last: last,
+                            email: email,
+                            password: password,
+                            city: city,
+                          );
+                        }
                       },
                       text: 'sign up'),
                   SizedBox(

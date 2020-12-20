@@ -9,11 +9,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
+  final String email;
+  final String password;
+
+  LoginScreen({this.email, this.password});
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    if (email != null && password != null) {
+      emailController.text = email;
+      passwordController.text = password;
+    }
+
     return BlocConsumer<LoginCubit, LoginStates>(
       listener: (context, state) {
         if (state is LoginStateLoading) {
@@ -24,6 +34,8 @@ class LoginScreen extends StatelessWidget {
         }
 
         if (state is LoginStateSuccess) {
+          // close the progress dialog in the last state
+          Navigator.pop(context);
           navigateAndFinish(
             context,
             HomeScreen(),
@@ -31,9 +43,12 @@ class LoginScreen extends StatelessWidget {
         }
 
         if (state is LoginStateError) {
+          // close the progress dialog in the last state
+          Navigator.pop(context);
           buildProgress(
             context: context,
-            text: state.error.toString(),
+            text: "this account not exist",
+            error: true,
           );
         }
       },
@@ -72,17 +87,27 @@ class LoginScreen extends StatelessWidget {
                       title: 'Password',
                       hint: '***************',
                       controller: passwordController,
+                      isPassword: true,
                       type: TextInputType.visiblePassword),
                   SizedBox(
                     height: 60.0,
                   ),
                   defaultButton(
                       onPressed: () {
-                        // navigateTo(context, LoginScreen());
-                        LoginCubit.get(context).login(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
+                        // save data for validation
+                        String email = emailController.text;
+                        String password = passwordController.text;
+
+                        if (email.isEmpty || password.isEmpty) {
+                          showToast(
+                              message: "please enter your data", error: true);
+                        } else {
+                          // navigateTo(context, LoginScreen());
+                          LoginCubit.get(context).login(
+                            email: email,
+                            password: password,
+                          );
+                        }
                       },
                       text: 'login'),
                   SizedBox(
