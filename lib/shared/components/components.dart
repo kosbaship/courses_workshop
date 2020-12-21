@@ -2,6 +2,24 @@ import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+// save some user info
+// add shared preferences
+// declare instance
+SharedPreferences preferences;
+
+// get instance from the shared preferences class
+Future<void> initPref() async {
+  preferences = await SharedPreferences.getInstance();
+}
+
+// save user token get return type by press setString + ctrl
+Future<bool> saveToken(String token) => preferences.setString('token', token);
+// get user token
+String getToken() => preferences.getString('token');
+// remove user token
+Future<bool> removeToken() => preferences.remove('token');
 
 // =========================== defaultButton
 Widget defaultButton(

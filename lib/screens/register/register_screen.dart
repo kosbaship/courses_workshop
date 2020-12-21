@@ -32,7 +32,7 @@ class RegisterScreen extends StatelessWidget {
             context,
             LoginScreen(
               email: emailController.text,
-              password: emailController.text,
+              password: passwordController.text,
             ),
           );
         }

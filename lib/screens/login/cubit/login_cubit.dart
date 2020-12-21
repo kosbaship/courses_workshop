@@ -20,7 +20,8 @@ class LoginCubit extends Cubit<LoginStates> {
         'client_secret': 'UFj2FJ7X2jQfSjtptUIadua4rb0yeZjKvVaS55T9',
       },
     ).then((value) {
-      emit(LoginStateSuccess());
+      // this access token is inside the server response
+      emit(LoginStateSuccess(value.data["access_token"]));
     }).catchError((e) {
       emit(LoginStateError(e.toString()));
     });

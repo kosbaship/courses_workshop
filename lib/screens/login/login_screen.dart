@@ -36,10 +36,16 @@ class LoginScreen extends StatelessWidget {
         if (state is LoginStateSuccess) {
           // close the progress dialog in the last state
           Navigator.pop(context);
-          navigateAndFinish(
-            context,
-            HomeScreen(),
-          );
+          // save user access_token
+          saveToken(state.token).then((value) {
+            if (value) {
+              navigateAndFinish(context, HomeScreen());
+            } else
+              showToast(
+                message: 'error while saving a token',
+                error: false,
+              );
+          });
         }
 
         if (state is LoginStateError) {
