@@ -9,12 +9,12 @@ class ForgetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: buildAppbar(widget: Container(), context: context),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              backButton(context),
               Padding(
                 padding: EdgeInsetsDirectional.only(
                   start: 20.0,

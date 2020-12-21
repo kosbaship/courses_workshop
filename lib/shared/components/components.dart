@@ -1,4 +1,5 @@
 import 'package:courses_workshop/shared/colors/common_colors.dart';
+import 'package:courses_workshop/shared/network/remote/dio_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -6,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // save some user info
 // add shared preferences
-// declare instance
+// declare instance ====================  SharedPreferences
 SharedPreferences preferences;
 
 // get instance from the shared preferences class
@@ -20,6 +21,11 @@ Future<bool> saveToken(String token) => preferences.setString('token', token);
 String getToken() => preferences.getString('token');
 // remove user token
 Future<bool> removeToken() => preferences.remove('token');
+//=======================================================
+//======================= initialize data source once
+void initApp() {
+  DioHelper();
+}
 
 // =========================== defaultButton
 Widget defaultButton(
@@ -206,28 +212,6 @@ void buildProgress({context, text, error = false}) => showDialog(
         ),
       ),
     );
-// ============================ Back ButtonBar
-Widget backButton(context) => Padding(
-      padding: EdgeInsetsDirectional.only(start: 6.0),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 4.0,
-          ),
-          IconButton(
-            padding: EdgeInsetsDirectional.only(start: 0.0),
-            onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(
-              Icons.keyboard_arrow_left,
-              size: 40,
-            ),
-          ),
-          SizedBox(
-            height: 15.0,
-          ),
-        ],
-      ),
-    );
 // ============================ flutter toast
 showToast({@required String message, @required bool error}) =>
     Fluttertoast.showToast(
@@ -238,3 +222,23 @@ showToast({@required String message, @required bool error}) =>
         backgroundColor: error ? Colors.red : Colors.green,
         textColor: Colors.white,
         fontSize: 16.0);
+
+// ===========================  add app bar
+buildAppbar({@required context, @required widget}) => AppBar(
+      backgroundColor: kPaleLilacColor,
+      leading: GestureDetector(
+        child: Icon(
+          Icons.keyboard_arrow_left,
+          size: 40,
+          color: kDarkColor,
+        ),
+        onTap: () => Navigator.of(context).pop(),
+      ),
+      actions: [
+        widget,
+        SizedBox(
+          width: 20.0,
+        ),
+      ],
+      elevation: 0.0,
+    );

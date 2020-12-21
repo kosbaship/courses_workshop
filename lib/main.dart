@@ -6,8 +6,8 @@ import 'package:courses_workshop/shared/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'layout/cubit/home_cubit.dart';
 import 'layout/home_screen.dart';
-import 'shared/network/remote/dio_helper.dart';
 
 main() async {
   // requierd for main extras
@@ -32,17 +32,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // create the database instance
-    DioHelper();
+    initApp();
 
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => RegisterCubit()),
         BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => HomeCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Courses',
         theme: ThemeData(
+            fontFamily: "MontserratRegular",
             scaffoldBackgroundColor: kPaleLilacColor,
             primaryColor: kLightishPurpleColor,
             accentColor: kLightishPurpleColor),
