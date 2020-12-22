@@ -242,3 +242,36 @@ buildAppbar({@required context, @required widget}) => AppBar(
       ],
       elevation: 0.0,
     );
+// ==================================== Custom simple Card
+simpleCard({@required String text, @required Icon icon, @required heroTag}) =>
+    Container(
+      width: 160.0,
+      height: 160.0,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(35),
+          color: kWhiteColor,
+          border: Border.all(
+            width: 3,
+            color: kWhiteColor,
+          )),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // icon
+          FloatingActionButton(heroTag: heroTag, onPressed: () {}, child: icon),
+          SizedBox(
+            height: 15,
+          ),
+          // text
+          quickCustomText(text: text)
+        ],
+      ),
+    );
+
+// ========================  circle with icon
+circularIcon({@required heroTag, @required Icon icon}) => FloatingActionButton(
+      onPressed: () {},
+      heroTag: heroTag,
+      elevation: 0.0,
+      child: icon,
+    );
