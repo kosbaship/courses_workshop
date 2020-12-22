@@ -232,7 +232,10 @@ buildAppbar({@required context, @required widget}) => AppBar(
           size: 40,
           color: kDarkColor,
         ),
-        onTap: () => Navigator.of(context).pop(),
+        onTap: () {
+          showToast(message: "Under Developing", error: false);
+        },
+        // onTap: () => Navigator.of(context).pop(),
       ),
       actions: [
         widget,
@@ -374,5 +377,30 @@ listItem({
             flex: 4,
           ),
         ],
+      ),
+    );
+// ======================================= setting card item
+settingsCardItem({
+  @required onTap,
+  @required text,
+}) =>
+    InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding:
+            EdgeInsetsDirectional.only(start: 20, top: 10, end: 5, bottom: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            quickCustomText(
+              text: text,
+              fontSize: 16,
+            ),
+            Icon(
+              Icons.chevron_right,
+              size: 35,
+            )
+          ],
+        ),
       ),
     );
