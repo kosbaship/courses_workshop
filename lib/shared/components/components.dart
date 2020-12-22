@@ -248,12 +248,9 @@ simpleCard({@required String text, @required Icon icon, @required heroTag}) =>
       width: 160.0,
       height: 160.0,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(35),
-          color: kWhiteColor,
-          border: Border.all(
-            width: 3,
-            color: kWhiteColor,
-          )),
+        borderRadius: BorderRadius.circular(35),
+        color: kWhiteColor,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
