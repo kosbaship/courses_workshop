@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginStates>(
       listener: (context, state) {
         if (state is LoginStateLoading) {
-          buildProgress(
+          buildProgressDialog(
             context: context,
             text: 'please wait ...',
           );
@@ -51,7 +51,7 @@ class LoginScreen extends StatelessWidget {
         if (state is LoginStateError) {
           // close the progress dialog in the last state
           Navigator.pop(context);
-          buildProgress(
+          buildProgressDialog(
             context: context,
             text: "this account not exist",
             error: true,
@@ -74,14 +74,14 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     height: 40.0,
                   ),
-                  quickCustomText(
+                  buildQuickText(
                     text: "Login",
                     fontSize: 28.0,
                   ),
                   SizedBox(
                     height: 240.0,
                   ),
-                  defaultTextField(
+                  buildDefaultTextField(
                       title: 'Email',
                       hint: 'Sarahsmith@gmail.com',
                       controller: emailController,
@@ -89,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     height: 40.0,
                   ),
-                  defaultTextField(
+                  buildDefaultTextField(
                       title: 'Password',
                       hint: '***************',
                       controller: passwordController,
@@ -98,7 +98,7 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     height: 60.0,
                   ),
-                  defaultButton(
+                  buildDefaultButton(
                       onPressed: () {
                         // save data for validation
                         String email = emailController.text;
@@ -119,9 +119,9 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     height: 25.0,
                   ),
-                  defaultButton(
+                  buildDefaultButton(
                       onPressed: () {
-                        navigateToAndCloseCurrent(context, RegisterScreen());
+                        navigateToReplaceMe(context, RegisterScreen());
                       },
                       text: 'sign up',
                       textColor: kLightishPurpleColor,
@@ -136,7 +136,7 @@ class LoginScreen extends StatelessWidget {
                     },
                     child: Container(
                       width: double.infinity,
-                      child: quickCustomText(
+                      child: buildQuickText(
                         text: "Forget Password .. ?",
                       ),
                     ),

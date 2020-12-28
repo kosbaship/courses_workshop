@@ -1,4 +1,5 @@
 import 'package:courses_workshop/screens/login/login_screen.dart';
+import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:courses_workshop/shared/components/components.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,21 @@ class ForgetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppbar(widget: Container(), context: context),
+      appBar: buildAppbar(
+        actionWidget: Container(),
+        context: context,
+        leadingWidget: IconButton(
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            size: 40,
+            color: kDarkColor,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          // onTap: () => Navigator.of(context).pop(),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -23,14 +38,14 @@ class ForgetPasswordScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    quickCustomText(
+                    buildQuickText(
                       text: "Forget Password",
                       fontSize: 28.0,
                     ),
                     SizedBox(
                       height: 150.0,
                     ),
-                    defaultTextField(
+                    buildDefaultTextField(
                         title: 'Email',
                         hint: 'Sarahsmith@gmail.com',
                         controller: emailController,
@@ -38,7 +53,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     SizedBox(
                       height: 150.0,
                     ),
-                    defaultButton(
+                    buildDefaultButton(
                         onPressed: () {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: emailController.text != ""
@@ -56,7 +71,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                         onTap: () {
                           navigateTo(context, LoginScreen());
                         },
-                        child: quickCustomText(
+                        child: buildQuickText(
                           text: "Login",
                         ),
                       ),

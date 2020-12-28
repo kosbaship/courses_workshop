@@ -21,21 +21,21 @@ class WelcomeScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                headerText(
+                buildMainHeader(
                   text: "Welcome to Courses",
                 ),
-                logo(),
-                defaultButton(
+                drawLogo(),
+                buildDefaultButton(
                     onPressed: () {
-                      navigateToAndCloseCurrent(context, LoginScreen());
+                      navigateToReplaceMe(context, LoginScreen());
                     },
                     text: 'login'),
                 SizedBox(
                   height: 25.0,
                 ),
-                defaultButton(
+                buildDefaultButton(
                     onPressed: () {
-                      navigateToAndCloseCurrent(context, RegisterScreen());
+                      navigateToReplaceMe(context, RegisterScreen());
                     },
                     text: 'sign up',
                     textColor: kLightishPurpleColor,
@@ -44,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 25.0,
                 ),
-                quickCustomText(
+                buildQuickText(
                   text: "Or Login with",
                 ),
                 SizedBox(

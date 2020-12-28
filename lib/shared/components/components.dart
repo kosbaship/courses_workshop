@@ -1,34 +1,27 @@
 import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:courses_workshop/shared/network/remote/dio_helper.dart';
+import 'package:courses_workshop/shared/styles/style.dart';
+import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// save some user info
-// add shared preferences
-// declare instance ====================  SharedPreferences
 SharedPreferences preferences;
-
-// get instance from the shared preferences class
 Future<void> initPref() async {
   preferences = await SharedPreferences.getInstance();
 }
 
-// save user token get return type by press setString + ctrl
 Future<bool> saveToken(String token) => preferences.setString('token', token);
-// get user token
 String getToken() => preferences.getString('token');
-// remove user token
 Future<bool> removeToken() => preferences.remove('token');
-//=======================================================
-//======================= initialize data source once
+
 void initApp() {
   DioHelper();
 }
 
-// =========================== defaultButton
-Widget defaultButton(
+Widget buildDefaultButton(
         {@required Function onPressed,
         @required String text,
         Color textColor = kWhiteColor,
@@ -57,8 +50,8 @@ Widget defaultButton(
         ),
       ),
     );
-// =========================== defaultTextFormField
-Widget defaultTextField({
+
+Widget buildDefaultTextField({
   String title = "title",
   String hint = '',
   @required TextEditingController controller,
@@ -86,7 +79,7 @@ Widget defaultTextField({
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          quickCustomText(
+          buildQuickText(
             text: title,
             fontSize: 12,
             color: kDarkColor,
@@ -104,8 +97,8 @@ Widget defaultTextField({
         ],
       ),
     );
-// =========================== logo
-Widget logo() => Column(
+
+Widget drawLogo() => Column(
       children: [
         SizedBox(
           height: 25.0,
@@ -119,8 +112,8 @@ Widget logo() => Column(
         ),
       ],
     );
-// =========================== quickCustomText
-Widget quickCustomText(
+
+Widget buildQuickText(
         {@required String text,
         double fontSize = 16.0,
         Color color = kDarkColor,
@@ -137,8 +130,7 @@ Widget quickCustomText(
       ),
     );
 
-// =========================== headerText
-Widget headerText(
+Widget buildMainHeader(
         {@required String text,
         double fontSize = 32.0,
         Color fontColor = kLightishPurpleColor}) =>
@@ -159,21 +151,18 @@ Widget headerText(
       ],
     );
 
-// =========================== navigate To
 void navigateTo(context, widget) => Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => widget,
       ),
     );
-// =========================== navigate To and Close Current
-void navigateToAndCloseCurrent(context, widget) => Navigator.pushReplacement(
+void navigateToReplaceMe(context, widget) => Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => widget,
       ),
     );
-// =========================== navigate To and Close Current
 void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
     context,
     MaterialPageRoute(
@@ -181,8 +170,7 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
     ),
     (Route<dynamic> route) => false);
 
-// =========================== buildProgress
-void buildProgress({context, text, error = false}) => showDialog(
+void buildProgressDialog({context, text, error = false}) => showDialog(
       context: context,
       builder: (context) => AlertDialog(
         content: Column(
@@ -204,7 +192,7 @@ void buildProgress({context, text, error = false}) => showDialog(
             ),
             if (error) SizedBox(height: 20.0),
             if (error)
-              defaultButton(
+              buildDefaultButton(
                 onPressed: () => Navigator.pop(context),
                 text: "Cancel",
               ),
@@ -212,7 +200,7 @@ void buildProgress({context, text, error = false}) => showDialog(
         ),
       ),
     );
-// ============================ flutter toast
+
 showToast({@required String message, @required bool error}) =>
     Fluttertoast.showToast(
         msg: message,
@@ -223,184 +211,349 @@ showToast({@required String message, @required bool error}) =>
         textColor: Colors.white,
         fontSize: 16.0);
 
-// ===========================  add app bar
-buildAppbar({@required context, @required widget}) => AppBar(
+buildAppbar(
+        {@required context, @required actionWidget, @required leadingWidget}) =>
+    AppBar(
       backgroundColor: kPaleLilacColor,
-      leading: GestureDetector(
-        child: Icon(
-          Icons.keyboard_arrow_left,
-          size: 40,
-          color: kDarkColor,
-        ),
-        onTap: () {
-          showToast(message: "Under Developing", error: false);
-        },
-        // onTap: () => Navigator.of(context).pop(),
-      ),
+      leading: leadingWidget,
       actions: [
-        widget,
+        actionWidget,
         SizedBox(
           width: 20.0,
         ),
       ],
       elevation: 0.0,
     );
-// ==================================== Custom simple Card
-simpleCard({@required String text, @required Icon icon, @required heroTag}) =>
-    Container(
-      width: 160.0,
-      height: 160.0,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(35),
-        color: kWhiteColor,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // icon
-          FloatingActionButton(heroTag: heroTag, onPressed: () {}, child: icon),
-          SizedBox(
-            height: 15,
-          ),
-          // text
-          quickCustomText(text: text)
-        ],
-      ),
-    );
 
-// ========================  circle with icon
-circularIcon({@required heroTag, @required Icon icon}) => FloatingActionButton(
-      onPressed: () {},
-      heroTag: heroTag,
-      elevation: 0.0,
-      child: icon,
-    );
-// =============================================== list item in courses
-listItem({
-  @required heroTag,
-  @required titleText,
-  @required bodyText,
-}) =>
-    Container(
-      padding: EdgeInsets.all(10),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(35),
-        color: kWhiteColor,
-      ),
-      child: Row(
-        children: [
-          // left
-          Expanded(
-            child: circularIcon(
-              heroTag: heroTag,
-              icon: Icon(
-                Icons.school,
-                size: 25,
-                color: kPaleLilacColor,
+buildProfileCard(
+        {@required String title, @required Widget shape, @required function}) =>
+    GestureDetector(
+      onTap: function,
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        width: 140.0,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            15.0,
+          ),
+          color: Colors.white,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              foregroundColor: kWhiteColor,
+              backgroundColor: kLightishPurpleColor,
+              radius: 30.0,
+              child: shape,
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Text(
+              title.toString(),
+              textAlign: TextAlign.center,
+              style: kBlack16Bold().copyWith(
+                fontFamily: "MontserratRegular",
+                color: Colors.grey,
               ),
             ),
-            flex: 3,
-          ),
-
-          // center
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  titleText,
-                  // style: TextStyle(fontSize: 16),
-                ),
-                SizedBox(
-                  height: 3,
-                ),
-                quickCustomText(
-                    text: bodyText,
-                    textAlign: TextAlign.start,
-                    fontSize: 10,
-                    color: kGreyDarkColor),
-              ],
-            ),
-            flex: 6,
-          ),
-          Expanded(
-            child: SizedBox(
-              width: 1,
-            ),
-          ),
-          // right
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                quickCustomText(
-                  text: "Total ratings",
-                  fontSize: 9,
-                  // textAlign: TextAlign.start,
-                  color: kDarkColor,
-                ),
-                SizedBox(
-                  height: 3,
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.star,
-                      size: 16,
-                      color: kYellowColor,
-                    ),
-                    Icon(
-                      Icons.star,
-                      size: 16,
-                      color: kYellowColor,
-                    ),
-                    Icon(
-                      Icons.star,
-                      size: 16,
-                      color: kYellowColor,
-                    ),
-                    Icon(
-                      Icons.star,
-                      size: 16,
-                      color: kYellowColor,
-                    ),
-                    Icon(
-                      Icons.star,
-                      size: 16,
-                      color: kDarkColor,
-                    ),
-                  ],
-                )
-              ],
-            ),
-            flex: 4,
-          ),
-        ],
+          ],
+        ),
       ),
     );
-// ======================================= setting card item
-settingsCardItem({
+
+drawSettingsCardItem({
   @required onTap,
   @required text,
 }) =>
-    InkWell(
+    ListTile(
+      tileColor: Colors.white,
       onTap: onTap,
-      child: Padding(
-        padding:
-            EdgeInsetsDirectional.only(start: 20, top: 10, end: 5, bottom: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      title: Text(
+        text.toString(),
+      ),
+      trailing: Icon(
+        Icons.arrow_forward_ios,
+        size: 14.0,
+      ),
+    );
+
+Widget buildDetailedCourseItem({
+  @required Function startToday,
+  @required double price,
+  @required Widget widget,
+  @required String title,
+  @required String description,
+  bool initiallyExpanded = false,
+}) =>
+    Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(
+          15.0,
+        ),
+      ),
+      child: ExpansionTileCard(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        finalPadding: EdgeInsets.zero,
+        baseColor: kWhiteColor,
+        expandedColor: kWhiteColor,
+        initiallyExpanded: initiallyExpanded,
+        elevation: 0.0,
+        title: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            quickCustomText(
-              text: text,
-              fontSize: 16,
+            CircleAvatar(
+              child: widget,
+              radius: 25.0,
+              backgroundColor: kLightishPurpleColor,
+              foregroundColor: kWhiteColor,
             ),
-            Icon(
-              Icons.chevron_right,
-              size: 35,
-            )
+            SizedBox(
+              width: 15.0,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: kGrey16Bold(),
+                        ),
+                      ),
+                      RatingBar.builder(
+                        initialRating: 4,
+                        minRating: 1,
+                        direction: Axis.horizontal,
+                        allowHalfRating: false,
+                        itemCount: 5,
+                        itemSize: 12.0,
+                        ignoreGestures: true,
+                        itemPadding: EdgeInsets.zero,
+                        itemBuilder: (context, _) => Icon(
+                          Icons.star,
+                          color: kYellowColor,
+                        ),
+                        onRatingUpdate: (rating) {
+                          print(rating);
+                        },
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Text(
+                    description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: kGrey12(),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
+        onExpansionChanged: (value) {},
+        children: <Widget>[
+          Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: buildQuickText(
+                            textAlign: TextAlign.start,
+                            text: "32 Lectures",
+                            fontSize: 16,
+                          ),
+                        ),
+                        Expanded(
+                          child: buildQuickText(
+                            textAlign: TextAlign.end,
+                            text: "64 h, 16 m",
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 12.0,
+                    ),
+                    buildQuickText(
+                        text: "This course includes",
+                        fontSize: 12,
+                        textAlign: TextAlign.start),
+                    SizedBox(
+                      height: 16.0,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.question_answer_outlined,
+                                    size: 20,
+                                    color: kDarkColor,
+                                  ),
+                                  SizedBox(width: 10.0),
+                                  buildQuickText(
+                                    text: "24 Quizzes",
+                                    fontSize: 10,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.file_copy_outlined,
+                                    size: 20,
+                                    color: kDarkColor,
+                                  ),
+                                  SizedBox(width: 10.0),
+                                  buildQuickText(
+                                    text: "16 Support files",
+                                    fontSize: 10,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.question_answer_outlined,
+                                    size: 20,
+                                    color: kDarkColor,
+                                  ),
+                                  SizedBox(width: 10.0),
+                                  buildQuickText(
+                                    text: "8 Article",
+                                    fontSize: 10,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.loop_outlined,
+                                    size: 20,
+                                    color: kDarkColor,
+                                  ),
+                                  SizedBox(width: 10.0),
+                                  buildQuickText(
+                                    text: "Full Time Access",
+                                    fontSize: 10,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.smartphone_outlined,
+                                    size: 20,
+                                    color: kDarkColor,
+                                  ),
+                                  SizedBox(width: 10.0),
+                                  buildQuickText(
+                                    text: "Mobile, Desktop",
+                                    fontSize: 10,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.format_indent_increase_sharp,
+                                    size: 20,
+                                    color: kDarkColor,
+                                  ),
+                                  SizedBox(width: 10.0),
+                                  buildQuickText(
+                                    text: "Certificate",
+                                    fontSize: 10,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        buildQuickText(
+                            text: "Price",
+                            fontSize: 10,
+                            textAlign: TextAlign.start),
+                        buildQuickText(
+                            text: "\$$price",
+                            fontSize: 20,
+                            textAlign: TextAlign.start),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: Container(
+                  width: 160,
+                  height: 46.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16.0),
+                      topRight: Radius.zero,
+                      bottomLeft: Radius.zero,
+                      bottomRight: Radius.circular(16.0),
+                    ),
+                    color: kLightishPurpleColor,
+                  ),
+                  child: Center(
+                    child: MaterialButton(
+                      onPressed: startToday,
+                      child: buildQuickText(
+                        text: "Start Today",
+                        color: kWhiteColor,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );

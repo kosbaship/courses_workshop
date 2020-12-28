@@ -19,7 +19,7 @@ class RegisterScreen extends StatelessWidget {
     return BlocConsumer<RegisterCubit, RegisterStates>(
       listener: (BuildContext context, state) {
         if (state is RegisterStateLoading) {
-          buildProgress(
+          buildProgressDialog(
             context: context,
             text: 'please wait ...',
           );
@@ -40,7 +40,7 @@ class RegisterScreen extends StatelessWidget {
         if (state is RegisterStateError) {
           // close the progress dialog in the last state
           Navigator.pop(context);
-          buildProgress(
+          buildProgressDialog(
             context: context,
             text: "this account is already exist",
             error: true,
@@ -62,14 +62,14 @@ class RegisterScreen extends StatelessWidget {
                   SizedBox(
                     height: 40.0,
                   ),
-                  quickCustomText(
+                  buildQuickText(
                     text: "Sign up",
                     fontSize: 28.0,
                   ),
                   SizedBox(
                     height: 50.0,
                   ),
-                  defaultTextField(
+                  buildDefaultTextField(
                       title: 'First name',
                       hint: 'Sarah',
                       controller: firstNameController,
@@ -77,7 +77,7 @@ class RegisterScreen extends StatelessWidget {
                   SizedBox(
                     height: 20.0,
                   ),
-                  defaultTextField(
+                  buildDefaultTextField(
                       title: 'Last name',
                       hint: 'Smith',
                       controller: lastNameController,
@@ -85,7 +85,7 @@ class RegisterScreen extends StatelessWidget {
                   SizedBox(
                     height: 20.0,
                   ),
-                  defaultTextField(
+                  buildDefaultTextField(
                       title: 'Email',
                       hint: 'Sarahsmith@gmail.com',
                       controller: emailController,
@@ -93,7 +93,7 @@ class RegisterScreen extends StatelessWidget {
                   SizedBox(
                     height: 20.0,
                   ),
-                  defaultTextField(
+                  buildDefaultTextField(
                       title: 'Password',
                       hint: '***************',
                       controller: passwordController,
@@ -102,7 +102,7 @@ class RegisterScreen extends StatelessWidget {
                   SizedBox(
                     height: 20.0,
                   ),
-                  defaultTextField(
+                  buildDefaultTextField(
                       title: 'City',
                       hint: 'Aswan',
                       controller: cityController,
@@ -110,7 +110,7 @@ class RegisterScreen extends StatelessWidget {
                   SizedBox(
                     height: 40.0,
                   ),
-                  defaultButton(
+                  buildDefaultButton(
                       onPressed: () {
                         // save data for validation
                         String first = firstNameController.text;
@@ -144,9 +144,9 @@ class RegisterScreen extends StatelessWidget {
                   SizedBox(
                     height: 20.0,
                   ),
-                  defaultButton(
+                  buildDefaultButton(
                       onPressed: () {
-                        navigateToAndCloseCurrent(context, LoginScreen());
+                        navigateToReplaceMe(context, LoginScreen());
                       },
                       text: 'login',
                       textColor: kLightishPurpleColor,
@@ -161,7 +161,7 @@ class RegisterScreen extends StatelessWidget {
                     },
                     child: Container(
                       width: double.infinity,
-                      child: quickCustomText(
+                      child: buildQuickText(
                         text: "Forget your password .. ?",
                       ),
                     ),

@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsetsDirectional.only(start: 20, end: 20),
         child: Column(
           children: [
             SizedBox(
@@ -32,17 +33,25 @@ class ProfileScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,
+                    fontWeight: FontWeight.bold,
                     color: kDarkColor,
                     fontFamily: "MontserratMeduium",
                   ),
                 ),
-                Icon(Icons.edit)
+                IconButton(
+                  icon: Icon(
+                    Icons.edit_outlined,
+                    size: 18.0,
+                    color: kLightishPurpleColor,
+                  ),
+                  onPressed: () {},
+                ),
               ],
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
-            quickCustomText(
+            buildQuickText(
               text: "mohamed.kosba96@gmail.com",
               fontSize: 12,
             ),
@@ -51,27 +60,31 @@ class ProfileScreen extends StatelessWidget {
             ),
             Row(
               children: [
-                simpleCard(
-                    text: 'My\nCourses',
-                    icon: Icon(
-                      Icons.plus_one,
-                      size: 25,
-                      color: kPaleLilacColor,
-                    ),
-                    heroTag: "profileOne"),
                 Expanded(
-                  child: SizedBox(
-                    width: 1,
-                  ),
+                  child: buildProfileCard(
+                      title: 'My\nCourses',
+                      shape: Icon(
+                        Icons.plus_one,
+                        size: 25,
+                        color: kPaleLilacColor,
+                      ),
+                      function: () {}),
+                  flex: 1,
                 ),
-                simpleCard(
-                    text: 'My\nFavorite',
-                    icon: Icon(
-                      Icons.favorite,
-                      size: 25,
-                      color: kPaleLilacColor,
-                    ),
-                    heroTag: "profileTwo"),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: buildProfileCard(
+                      title: 'My\nFavorite',
+                      shape: Icon(
+                        Icons.favorite,
+                        size: 25,
+                        color: kPaleLilacColor,
+                      ),
+                      function: () {}),
+                  flex: 1,
+                ),
               ],
             ),
             SizedBox(
@@ -79,27 +92,29 @@ class ProfileScreen extends StatelessWidget {
             ),
             Row(
               children: [
-                simpleCard(
-                    text: 'My\Cart',
-                    icon: Icon(
-                      Icons.shopping_cart,
-                      size: 25,
-                      color: kPaleLilacColor,
-                    ),
-                    heroTag: "profileCart"),
                 Expanded(
-                  child: SizedBox(
-                    width: 1,
-                  ),
-                ),
-                simpleCard(
-                    text: 'My\nReviews',
-                    icon: Icon(
-                      Icons.star,
-                      size: 25,
-                      color: kPaleLilacColor,
+                  child: buildProfileCard(
+                    function: () {},
+                    title: 'My\nCart',
+                    shape: Icon(
+                      Icons.shopping_cart_outlined,
                     ),
-                    heroTag: "profileReviews"),
+                  ),
+                  flex: 1,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: buildProfileCard(
+                    function: () {},
+                    title: 'My\nReviews',
+                    shape: Icon(
+                      Icons.star_half,
+                    ),
+                  ),
+                  flex: 1,
+                ),
               ],
             ),
             SizedBox(
@@ -107,27 +122,29 @@ class ProfileScreen extends StatelessWidget {
             ),
             Row(
               children: [
-                simpleCard(
-                    text: 'Invite\na friend',
-                    icon: Icon(
+                Expanded(
+                  child: buildProfileCard(
+                    function: () {},
+                    title: 'Invite a\nfriend',
+                    shape: Icon(
                       Icons.share,
-                      size: 25,
-                      color: kPaleLilacColor,
                     ),
-                    heroTag: "profileInvite"),
-                Expanded(
-                  child: SizedBox(
-                    width: 1,
                   ),
+                  flex: 1,
                 ),
-                simpleCard(
-                    text: 'Help',
-                    icon: Icon(
-                      Icons.help,
-                      size: 25,
-                      color: kPaleLilacColor,
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: buildProfileCard(
+                    function: () {},
+                    title: 'Help &\nSupport',
+                    shape: Icon(
+                      Icons.help_outline,
                     ),
-                    heroTag: "profileHelp"),
+                  ),
+                  flex: 1,
+                ),
               ],
             ),
             SizedBox(
@@ -140,7 +157,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-// quickCustomText(
-//   text: "Profile Screen",
-//   fontSize: 28,
-// ),

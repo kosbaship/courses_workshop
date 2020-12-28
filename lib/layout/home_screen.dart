@@ -18,17 +18,17 @@ class HomeScreen extends StatelessWidget {
         return Scaffold(
           appBar: buildAppbar(
             context: context,
-            widget: Icon(
-              Icons.notifications_none,
-              size: 30,
-              color: kDarkColor,
+            actionWidget: IconButton(
+              icon: Icon(
+                Icons.notifications_none,
+                size: 30.0,
+                color: kDarkColor,
+              ),
+              onPressed: () {},
             ),
+            leadingWidget: Container(),
           ),
-          body: Padding(
-            padding: const EdgeInsetsDirectional.only(start: 20, end: 20),
-            // set the widget to match the index
-            child: HomeCubit.get(context).bodies[currentIndex],
-          ),
+          body: HomeCubit.get(context).bodies[currentIndex],
           bottomNavigationBar: Container(
             height: 60.0,
             decoration: BoxDecoration(
