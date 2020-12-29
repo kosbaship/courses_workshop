@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         var currentIndex = HomeCubit.get(context).currentIndex;
 
         return Scaffold(
-          appBar: buildAppbar(
+          appBar: drawAppbar(
             context: context,
             actionWidget: IconButton(
               icon: Icon(

@@ -1,3 +1,4 @@
+import 'package:courses_workshop/models/category_model.dart';
 import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:courses_workshop/shared/network/remote/dio_helper.dart';
 import 'package:courses_workshop/shared/styles/style.dart';
@@ -79,7 +80,7 @@ Widget buildDefaultTextField({
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildQuickText(
+          writeQuickText(
             text: title,
             fontSize: 12,
             color: kDarkColor,
@@ -113,7 +114,7 @@ Widget drawLogo() => Column(
       ],
     );
 
-Widget buildQuickText(
+Widget writeQuickText(
         {@required String text,
         double fontSize = 16.0,
         Color color = kDarkColor,
@@ -130,7 +131,7 @@ Widget buildQuickText(
       ),
     );
 
-Widget buildMainHeader(
+Widget writeMainHeader(
         {@required String text,
         double fontSize = 32.0,
         Color fontColor = kLightishPurpleColor}) =>
@@ -211,7 +212,7 @@ showToast({@required String message, @required bool error}) =>
         textColor: Colors.white,
         fontSize: 16.0);
 
-buildAppbar(
+Widget drawAppbar(
         {@required context, @required actionWidget, @required leadingWidget}) =>
     AppBar(
       backgroundColor: kPaleLilacColor,
@@ -225,7 +226,7 @@ buildAppbar(
       elevation: 0.0,
     );
 
-buildProfileCard(
+Widget drawProfileCard(
         {@required String title, @required Widget shape, @required function}) =>
     GestureDetector(
       onTap: function,
@@ -263,23 +264,30 @@ buildProfileCard(
       ),
     );
 
-drawSettingsCardItem({
+Widget drawSettingsCardItem({
   @required onTap,
   @required text,
 }) =>
-    ListTile(
-      tileColor: Colors.white,
-      onTap: onTap,
-      title: Text(
-        text.toString(),
-      ),
-      trailing: Icon(
-        Icons.arrow_forward_ios,
-        size: 14.0,
-      ),
+    Column(
+      children: [
+        ListTile(
+          tileColor: Colors.white,
+          onTap: onTap,
+          title: Text(
+            text.toString(),
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            size: 14.0,
+          ),
+        ),
+        SizedBox(
+          height: 3.0,
+        )
+      ],
     );
 
-Widget buildDetailedCourseItem({
+Widget buildExpandedCourseItem({
   @required Function startToday,
   @required double price,
   @required Widget widget,
@@ -324,7 +332,6 @@ Widget buildDetailedCourseItem({
                           title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: kGrey16Bold(),
                         ),
                       ),
                       RatingBar.builder(
@@ -372,14 +379,14 @@ Widget buildDetailedCourseItem({
                     Row(
                       children: [
                         Expanded(
-                          child: buildQuickText(
+                          child: writeQuickText(
                             textAlign: TextAlign.start,
                             text: "32 Lectures",
                             fontSize: 16,
                           ),
                         ),
                         Expanded(
-                          child: buildQuickText(
+                          child: writeQuickText(
                             textAlign: TextAlign.end,
                             text: "64 h, 16 m",
                             fontSize: 12,
@@ -390,7 +397,7 @@ Widget buildDetailedCourseItem({
                     SizedBox(
                       height: 12.0,
                     ),
-                    buildQuickText(
+                    writeQuickText(
                         text: "This course includes",
                         fontSize: 12,
                         textAlign: TextAlign.start),
@@ -411,7 +418,7 @@ Widget buildDetailedCourseItem({
                                     color: kDarkColor,
                                   ),
                                   SizedBox(width: 10.0),
-                                  buildQuickText(
+                                  writeQuickText(
                                     text: "24 Quizzes",
                                     fontSize: 10,
                                   ),
@@ -426,7 +433,7 @@ Widget buildDetailedCourseItem({
                                     color: kDarkColor,
                                   ),
                                   SizedBox(width: 10.0),
-                                  buildQuickText(
+                                  writeQuickText(
                                     text: "16 Support files",
                                     fontSize: 10,
                                   ),
@@ -441,7 +448,7 @@ Widget buildDetailedCourseItem({
                                     color: kDarkColor,
                                   ),
                                   SizedBox(width: 10.0),
-                                  buildQuickText(
+                                  writeQuickText(
                                     text: "8 Article",
                                     fontSize: 10,
                                   ),
@@ -462,7 +469,7 @@ Widget buildDetailedCourseItem({
                                     color: kDarkColor,
                                   ),
                                   SizedBox(width: 10.0),
-                                  buildQuickText(
+                                  writeQuickText(
                                     text: "Full Time Access",
                                     fontSize: 10,
                                   ),
@@ -477,7 +484,7 @@ Widget buildDetailedCourseItem({
                                     color: kDarkColor,
                                   ),
                                   SizedBox(width: 10.0),
-                                  buildQuickText(
+                                  writeQuickText(
                                     text: "Mobile, Desktop",
                                     fontSize: 10,
                                   ),
@@ -492,7 +499,7 @@ Widget buildDetailedCourseItem({
                                     color: kDarkColor,
                                   ),
                                   SizedBox(width: 10.0),
-                                  buildQuickText(
+                                  writeQuickText(
                                     text: "Certificate",
                                     fontSize: 10,
                                   ),
@@ -509,11 +516,11 @@ Widget buildDetailedCourseItem({
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        buildQuickText(
+                        writeQuickText(
                             text: "Price",
                             fontSize: 10,
                             textAlign: TextAlign.start),
-                        buildQuickText(
+                        writeQuickText(
                             text: "\$$price",
                             fontSize: 20,
                             textAlign: TextAlign.start),
@@ -531,6 +538,7 @@ Widget buildDetailedCourseItem({
                 child: Container(
                   width: 160,
                   height: 46.0,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16.0),
@@ -540,14 +548,12 @@ Widget buildDetailedCourseItem({
                     ),
                     color: kLightishPurpleColor,
                   ),
-                  child: Center(
-                    child: MaterialButton(
-                      onPressed: startToday,
-                      child: buildQuickText(
-                        text: "Start Today",
-                        color: kWhiteColor,
-                        fontSize: 14,
-                      ),
+                  child: MaterialButton(
+                    onPressed: startToday,
+                    child: writeQuickText(
+                      text: "Start Today",
+                      color: kWhiteColor,
+                      fontSize: 14,
                     ),
                   ),
                 ),
@@ -555,5 +561,46 @@ Widget buildDetailedCourseItem({
             ],
           ),
         ],
+      ),
+    );
+Widget drawCategoryCard(CategoriesModel model) => GestureDetector(
+      onTap: () {
+        showToast(message: " Still developing ", error: false);
+      },
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        width: 140.0,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            15.0,
+          ),
+          color: Colors.white,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              foregroundColor: kWhiteColor,
+              backgroundColor: kLightishPurpleColor,
+              radius: 30.0,
+              child: Icon(
+                model.iconData,
+                size: 25,
+                color: kPaleLilacColor,
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Text(
+              model.title,
+              textAlign: TextAlign.center,
+              style: kBlack16Bold().copyWith(
+                fontFamily: "MontserratRegular",
+                color: Colors.grey,
+              ),
+            ),
+          ],
+        ),
       ),
     );

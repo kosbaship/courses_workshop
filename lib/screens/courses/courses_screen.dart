@@ -1,4 +1,4 @@
-import 'package:courses_workshop/shared/colors/common_colors.dart';
+import 'package:courses_workshop/models/category_model.dart';
 import 'package:courses_workshop/shared/components/components.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class CoursesScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // this is the title
-              buildQuickText(
+              writeQuickText(
                 text: "Courses",
                 textAlign: TextAlign.start,
                 fontSize: 28,
@@ -24,84 +24,18 @@ class CoursesScreen extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: BouncingScrollPhysics(),
-                child: Row(
-                  children: [
-                    buildProfileCard(
-                      title: 'Branding',
-                      shape: Icon(
-                        Icons.lightbulb_outline,
-                        size: 25,
-                        color: kPaleLilacColor,
-                      ),
-                      function: () {},
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    buildProfileCard(
-                      title: 'Design',
-                      shape: Icon(
-                        Icons.design_services_outlined,
-                        size: 25,
-                        color: kPaleLilacColor,
-                      ),
-                      function: () {},
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    buildProfileCard(
-                      title: 'Web',
-                      shape: Icon(
-                        Icons.web_outlined,
-                        size: 25,
-                        color: kPaleLilacColor,
-                      ),
-                      function: () {},
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    buildProfileCard(
-                      title: 'Mobile',
-                      shape: Icon(
-                        Icons.smartphone_outlined,
-                        size: 25,
-                        color: kPaleLilacColor,
-                      ),
-                      function: () {},
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    buildProfileCard(
-                      title: 'Code',
-                      shape: Icon(
-                        Icons.code_outlined,
-                        size: 25,
-                        color: kPaleLilacColor,
-                      ),
-                      function: () {},
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    buildProfileCard(
-                      title: 'Business',
-                      shape: Icon(
-                        Icons.business_center_outlined,
-                        size: 25,
-                        color: kPaleLilacColor,
-                      ),
-                      function: () {},
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ],
+              Container(
+                height: 155,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) =>
+                      drawCategoryCard(categories[index]),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      SizedBox(
+                    width: 20.0,
+                  ),
+                  itemCount: categories.length,
                 ),
               ),
               SizedBox(
@@ -109,7 +43,7 @@ class CoursesScreen extends StatelessWidget {
               ),
               Column(
                 children: [
-                  buildDetailedCourseItem(
+                  buildExpandedCourseItem(
                       startToday: () {
                         showToast(message: " Under Developing ", error: false);
                       },
@@ -121,7 +55,7 @@ class CoursesScreen extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-                  buildDetailedCourseItem(
+                  buildExpandedCourseItem(
                     startToday: () {
                       showToast(message: " Under Developing ", error: false);
                     },
@@ -134,7 +68,7 @@ class CoursesScreen extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-                  buildDetailedCourseItem(
+                  buildExpandedCourseItem(
                     startToday: () {
                       showToast(message: " Under Developing ", error: false);
                     },
@@ -146,7 +80,7 @@ class CoursesScreen extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-                  buildDetailedCourseItem(
+                  buildExpandedCourseItem(
                     startToday: () {
                       showToast(message: " Under Developing ", error: false);
                     },

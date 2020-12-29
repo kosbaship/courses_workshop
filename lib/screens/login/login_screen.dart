@@ -1,3 +1,4 @@
+import 'package:courses_workshop/layout/cubit/home_cubit.dart';
 import 'package:courses_workshop/layout/home_screen.dart';
 import 'package:courses_workshop/screens/forget_password/forget_password_screen.dart';
 import 'package:courses_workshop/screens/login/cubit/login_cubit.dart';
@@ -36,6 +37,7 @@ class LoginScreen extends StatelessWidget {
         if (state is LoginStateSuccess) {
           // close the progress dialog in the last state
           Navigator.pop(context);
+          HomeCubit.get(context).changeIndex(1);
           // save user access_token
           saveToken(state.token).then((value) {
             if (value) {
@@ -74,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     height: 40.0,
                   ),
-                  buildQuickText(
+                  writeQuickText(
                     text: "Login",
                     fontSize: 28.0,
                   ),
@@ -136,7 +138,7 @@ class LoginScreen extends StatelessWidget {
                     },
                     child: Container(
                       width: double.infinity,
-                      child: buildQuickText(
+                      child: writeQuickText(
                         text: "Forget Password .. ?",
                       ),
                     ),

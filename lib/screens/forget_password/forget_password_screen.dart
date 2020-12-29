@@ -10,7 +10,7 @@ class ForgetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppbar(
+      appBar: drawAppbar(
         actionWidget: Container(),
         context: context,
         leadingWidget: IconButton(
@@ -38,7 +38,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    buildQuickText(
+                    writeQuickText(
                       text: "Forget Password",
                       fontSize: 28.0,
                     ),
@@ -71,7 +71,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                         onTap: () {
                           navigateTo(context, LoginScreen());
                         },
-                        child: buildQuickText(
+                        child: writeQuickText(
                           text: "Login",
                         ),
                       ),

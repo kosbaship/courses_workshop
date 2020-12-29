@@ -7,12 +7,13 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsetsDirectional.only(start: 20, end: 20),
-            child: buildQuickText(
+            child: writeQuickText(
               text: "Settings",
               fontSize: 28,
             ),
@@ -22,7 +23,7 @@ class SettingsScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsetsDirectional.only(start: 20, end: 20),
-            child: buildQuickText(
+            child: writeQuickText(
               text: "Account Settings",
               fontSize: 14,
             ),
@@ -30,34 +31,27 @@ class SettingsScreen extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(35),
-              color: kWhiteColor,
-            ),
-            child: Column(
-              children: [
-                drawSettingsCardItem(onTap: () {}, text: "Account Security"),
-                Divider(
-                  thickness: 3,
-                  color: kPaleLilacColor,
-                ),
-                drawSettingsCardItem(onTap: () {}, text: "Email notifications"),
-                Divider(
-                  thickness: 3,
-                  color: kPaleLilacColor,
-                ),
-                drawSettingsCardItem(onTap: () {}, text: "Push notifications"),
-              ],
-            ),
-          ),
+          drawSettingsCardItem(
+              onTap: () {
+                showToast(message: " Under Developing ", error: false);
+              },
+              text: "Account Security"),
+          drawSettingsCardItem(
+              onTap: () {
+                showToast(message: " Under Developing ", error: false);
+              },
+              text: "Email notifications"),
+          drawSettingsCardItem(
+              onTap: () {
+                showToast(message: " Under Developing ", error: false);
+              },
+              text: "Push notifications"),
           SizedBox(
             height: 25,
           ),
           Padding(
             padding: const EdgeInsetsDirectional.only(start: 20, end: 20),
-            child: buildQuickText(
+            child: writeQuickText(
               text: "Support",
               fontSize: 14,
             ),
@@ -65,28 +59,21 @@ class SettingsScreen extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(35),
-              color: kWhiteColor,
-            ),
-            child: Column(
-              children: [
-                drawSettingsCardItem(onTap: () {}, text: "About App"),
-                Divider(
-                  thickness: 3,
-                  color: kPaleLilacColor,
-                ),
-                drawSettingsCardItem(onTap: () {}, text: "FAQs"),
-                Divider(
-                  thickness: 3,
-                  color: kPaleLilacColor,
-                ),
-                drawSettingsCardItem(onTap: () {}, text: "Contact Us"),
-              ],
-            ),
-          ),
+          drawSettingsCardItem(
+              onTap: () {
+                showToast(message: " Under Developing ", error: false);
+              },
+              text: "About App"),
+          drawSettingsCardItem(
+              onTap: () {
+                showToast(message: " Under Developing ", error: false);
+              },
+              text: "FAQs"),
+          drawSettingsCardItem(
+              onTap: () {
+                showToast(message: " Under Developing ", error: false);
+              },
+              text: "Contact Us"),
           SizedBox(
             height: 50,
           ),
@@ -94,8 +81,8 @@ class SettingsScreen extends StatelessWidget {
             padding: const EdgeInsetsDirectional.only(start: 20, end: 20),
             child: buildDefaultButton(
                 onPressed: () {
-                  removeToken();
-                  navigateAndFinish(context, WelcomeScreen());
+                  removeToken().then(
+                      (value) => navigateAndFinish(context, WelcomeScreen()));
                 },
                 text: "Sign out",
                 backgroundColor: kPaleLilacColor,

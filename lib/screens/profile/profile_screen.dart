@@ -28,30 +28,36 @@ class ProfileScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "Mohamed M. Kosba",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: kDarkColor,
-                    fontFamily: "MontserratMeduium",
+                Expanded(
+                  flex: 4,
+                  child: Text(
+                    "Mohamed M. Kosba",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: kDarkColor,
+                      fontFamily: "MontserratMeduium",
+                    ),
                   ),
                 ),
-                IconButton(
-                  icon: Icon(
-                    Icons.edit_outlined,
-                    size: 18.0,
-                    color: kLightishPurpleColor,
+                Expanded(
+                  flex: 1,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.edit_outlined,
+                      size: 35.0,
+                      color: kLightishPurpleColor,
+                    ),
+                    onPressed: () {},
                   ),
-                  onPressed: () {},
                 ),
               ],
             ),
             SizedBox(
               height: 10,
             ),
-            buildQuickText(
+            writeQuickText(
               text: "mohamed.kosba96@gmail.com",
               fontSize: 12,
             ),
@@ -61,7 +67,7 @@ class ProfileScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: buildProfileCard(
+                  child: drawProfileCard(
                       title: 'My\nCourses',
                       shape: Icon(
                         Icons.plus_one,
@@ -75,7 +81,7 @@ class ProfileScreen extends StatelessWidget {
                   width: 20,
                 ),
                 Expanded(
-                  child: buildProfileCard(
+                  child: drawProfileCard(
                       title: 'My\nFavorite',
                       shape: Icon(
                         Icons.favorite,
@@ -93,7 +99,7 @@ class ProfileScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: buildProfileCard(
+                  child: drawProfileCard(
                     function: () {},
                     title: 'My\nCart',
                     shape: Icon(
@@ -106,7 +112,7 @@ class ProfileScreen extends StatelessWidget {
                   width: 20,
                 ),
                 Expanded(
-                  child: buildProfileCard(
+                  child: drawProfileCard(
                     function: () {},
                     title: 'My\nReviews',
                     shape: Icon(
@@ -123,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: buildProfileCard(
+                  child: drawProfileCard(
                     function: () {},
                     title: 'Invite a\nfriend',
                     shape: Icon(
@@ -136,7 +142,7 @@ class ProfileScreen extends StatelessWidget {
                   width: 20,
                 ),
                 Expanded(
-                  child: buildProfileCard(
+                  child: drawProfileCard(
                     function: () {},
                     title: 'Help &\nSupport',
                     shape: Icon(

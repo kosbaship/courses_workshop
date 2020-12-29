@@ -21,7 +21,7 @@ class WelcomeScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                buildMainHeader(
+                writeMainHeader(
                   text: "Welcome to Courses",
                 ),
                 drawLogo(),
@@ -44,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 25.0,
                 ),
-                buildQuickText(
+                writeQuickText(
                   text: "Or Login with",
                 ),
                 SizedBox(
