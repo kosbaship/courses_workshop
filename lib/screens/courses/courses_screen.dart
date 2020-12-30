@@ -1,103 +1,92 @@
+import 'package:conditional_builder/conditional_builder.dart';
 import 'package:courses_workshop/models/category_model.dart';
+import 'package:courses_workshop/models/courses_model.dart';
+import 'package:courses_workshop/screens/courses/cubit/courses_cubit.dart';
+import 'package:courses_workshop/screens/courses/cubit/courses_states.dart';
 import 'package:courses_workshop/shared/components/components.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CoursesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // this screen designed in three layers
-    return Scaffold(
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.only(start: 20, end: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // this is the title
-              writeQuickText(
-                text: "Courses",
-                textAlign: TextAlign.start,
-                fontSize: 28,
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                height: 155,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) =>
-                      drawCategoryCard(categories[index]),
-                  separatorBuilder: (BuildContext context, int index) =>
+    return BlocProvider(
+      create: (context) => CoursesCubit()..getCourses(),
+      child: BlocConsumer<CoursesCubit, CoursesStates>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            List<CoursesModel> list = CoursesCubit.get(context).list;
+
+            return ConditionalBuilder(
+              condition: state is! CoursesStateLoading,
+              builder: (context) => SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.only(start: 20, end: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // this is the title
+                      writeQuickText(
+                        text: "Courses",
+                        textAlign: TextAlign.start,
+                        fontSize: 28,
+                      ),
                       SizedBox(
-                    width: 20.0,
+                        height: 5,
+                      ),
+                      Container(
+                        height: 155,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          physics: BouncingScrollPhysics(),
+                          itemBuilder: (BuildContext context, int index) =>
+                              drawCategoryCard(categories[index]),
+                          separatorBuilder: (BuildContext context, int index) =>
+                              SizedBox(
+                            width: 20.0,
+                          ),
+                          itemCount: categories.length,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      ListView.separated(
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) =>
+                            buildExpandedCourseItem(
+                                startToday: () {
+                                  showToast(
+                                      message:
+                                          " yes item price is ${list[index].price.toDouble()} ",
+                                      error: false);
+                                },
+                                price: list[index].price.toDouble() ?? 16.99,
+                                widget: Icon(Icons.work),
+                                title: list[index].title ?? "Wordpress",
+                                description: list[index].description ??
+                                    "Create your own website from scratch ",
+                                initiallyExpanded: false),
+                        itemCount: list.length,
+                        separatorBuilder: (BuildContext context, int index) =>
+                            SizedBox(
+                          height: 15.0,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                    ],
                   ),
-                  itemCount: categories.length,
                 ),
               ),
-              SizedBox(
-                height: 30,
-              ),
-              Column(
-                children: [
-                  buildExpandedCourseItem(
-                      startToday: () {
-                        showToast(message: " Under Developing ", error: false);
-                      },
-                      price: 16.99,
-                      widget: Icon(Icons.work),
-                      title: "Wordpress",
-                      description: "Create your own website from scratch ",
-                      initiallyExpanded: true),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  buildExpandedCourseItem(
-                    startToday: () {
-                      showToast(message: " Under Developing ", error: false);
-                    },
-                    price: 16.99,
-                    widget: Icon(Icons.web),
-                    title: "WebDesign",
-                    description:
-                        "Become a Web Site that looks great on all devices ",
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  buildExpandedCourseItem(
-                    startToday: () {
-                      showToast(message: " Under Developing ", error: false);
-                    },
-                    price: 16.99,
-                    widget: Icon(Icons.handyman_outlined),
-                    title: "Vue js",
-                    description: "An awesome javascript framework build",
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  buildExpandedCourseItem(
-                    startToday: () {
-                      showToast(message: " Under Developing ", error: false);
-                    },
-                    price: 16.99,
-                    widget: Icon(Icons.eco),
-                    title: "CSS",
-                    description: "Learn CSS for first time will increase",
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 15,
-              ),
-            ],
-          ),
-        ),
-      ),
+              fallback: (context) => Center(child: CircularProgressIndicator()),
+            );
+          }),
     );
   }
 }
