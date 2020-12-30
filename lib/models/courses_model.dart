@@ -3,7 +3,7 @@ class CoursesModel {
   String categoryId;
   String title;
   String description;
-  int price;
+  String price;
 
   CoursesModel({
     this.id,

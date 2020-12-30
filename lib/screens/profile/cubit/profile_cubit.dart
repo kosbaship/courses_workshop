@@ -1,5 +1,6 @@
 import 'package:courses_workshop/models/user_model.dart';
 import 'package:courses_workshop/screens/profile/cubit/profile_states.dart';
+import 'package:courses_workshop/shared/components/components.dart';
 import 'package:courses_workshop/shared/network/remote/dio_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +16,8 @@ class ProfileCubit extends Cubit<ProfileStates> {
   getUserInfo() {
     emit(ProfileStateLoading());
 
-    DioHelper.postData(path: 'lms/api/v1/my-account').then((value) {
+    DioHelper.postData(path: 'lms/api/v1/my-account', token: getToken())
+        .then((value) {
       emit(ProfileStateSuccess());
 
       userModel = UserModel.fromJson(value.data['result']);

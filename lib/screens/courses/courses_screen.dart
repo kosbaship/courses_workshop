@@ -62,10 +62,10 @@ class CoursesScreen extends StatelessWidget {
                                 startToday: () {
                                   showToast(
                                       message:
-                                          " yes item price is ${list[index].price.toDouble()} ",
+                                          " yes item price is ${list[index]} ",
                                       error: false);
                                 },
-                                price: list[index].price.toDouble() ?? 16.99,
+                                price: list[index].price ?? 16.99.toString(),
                                 widget: Icon(Icons.work),
                                 title: list[index].title ?? "Wordpress",
                                 description: list[index].description ??

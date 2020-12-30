@@ -94,7 +94,7 @@ class SearchScreen extends StatelessWidget {
                   startToday: () {
                     showToast(message: " Under Developing ", error: false);
                   },
-                  price: 16.99,
+                  price: 16.99.toString(),
                   widget: Icon(Icons.work),
                   title: "Wordpress",
                   description: "Create your own website from scratch ",
@@ -106,7 +106,7 @@ class SearchScreen extends StatelessWidget {
                   startToday: () {
                     showToast(message: " Under Developing ", error: false);
                   },
-                  price: 16.99,
+                  price: 16.99.toString(),
                   widget: Icon(Icons.web),
                   title: "WebDesign",
                   description:
@@ -119,7 +119,7 @@ class SearchScreen extends StatelessWidget {
                   startToday: () {
                     showToast(message: " Under Developing ", error: false);
                   },
-                  price: 16.99,
+                  price: 16.99.toString(),
                   widget: Icon(Icons.eco),
                   title: "CSS",
                   description: "Learn CSS for first time will increase",

@@ -289,7 +289,7 @@ Widget drawSettingsCardItem({
 
 Widget buildExpandedCourseItem({
   @required Function startToday,
-  @required double price,
+  @required String price,
   @required Widget widget,
   @required String title,
   @required String description,
