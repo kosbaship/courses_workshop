@@ -19,20 +19,8 @@ class HomeCubit extends Cubit<HomeStates> {
     SettingsScreen(),
   ];
 
-  // list of titles in case i need
-  // var titles =
-  // [
-  //   'Courses',
-  //   'Search',
-  //   'Profile',
-  //   'Settings',
-  // ];
-
   // current index
   int currentIndex = 1;
-
-  // every onTap on the nav btns will triger this
-  // to change the index number
   changeIndex(index) {
     currentIndex = index;
     emit(HomeIndexState());
