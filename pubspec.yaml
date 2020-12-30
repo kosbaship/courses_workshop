@@ -22,10 +22,17 @@ dependencies:
   expansion_tile_card: ^1.1.0
   conditional_builder: ^1.0.2
 
+
+
 dev_dependencies:
+  flutter_launcher_icons:
   flutter_test:
     sdk: flutter
 
+
+flutter_icons:
+  image_path: 'assets/images/logo_learn.png'
+  android: true
 
 flutter:
 
