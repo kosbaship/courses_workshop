@@ -3,8 +3,8 @@ import 'package:courses_workshop/models/category_model.dart';
 import 'package:courses_workshop/models/courses_model.dart';
 import 'package:courses_workshop/screens/courses/cubit/courses_cubit.dart';
 import 'package:courses_workshop/screens/courses/cubit/courses_states.dart';
+import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:courses_workshop/shared/components/components.dart';
-import 'package:courses_workshop/shared/styles/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,11 +34,18 @@ class CoursesScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // this is the title
-                          writeQuickText(
-                            text: "Courses",
-                            textAlign: TextAlign.start,
-                            fontSize: 28,
+                          Row(
+                            children: [
+                              writeQuickText(
+                                text: "Courses ",
+                                textAlign: TextAlign.start,
+                                fontSize: 28,
+                              ),
+                              writeQuickText(
+                                  text: '\(${list.length}\)',
+                                  fontSize: 22,
+                                  color: kLightishPurpleColor),
+                            ],
                           ),
                           SizedBox(
                             height: 5,
@@ -96,17 +103,17 @@ class CoursesScreen extends StatelessWidget {
                     ),
                   ),
                   fallback: (context) => Center(
-                    child: Text(
-                      'No Courses Yet',
-                      style: kBlack20Bold(),
-                    ),
+                    child: writeQuickText(
+                        text: 'No Courses Yet',
+                        fontSize: 22,
+                        color: kGreyColor),
                   ),
                 ),
                 fallback: (context) => Center(
-                  child: Text(
-                    'Error',
-                    style: kBlack20Bold(),
-                  ),
+                  child: writeQuickText(
+                      text: 'Error\n\nno Internet\nConnection',
+                      fontSize: 22,
+                      color: kGreyColor),
                 ),
               ),
               fallback: (context) => Center(child: CircularProgressIndicator()),
