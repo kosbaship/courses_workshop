@@ -6,6 +6,7 @@ import 'package:courses_workshop/screens/login/cubit/login_states.dart';
 import 'package:courses_workshop/screens/register/register_screen.dart';
 import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:courses_workshop/shared/components/components.dart';
+import 'package:courses_workshop/shared/network/local/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,10 +36,8 @@ class LoginScreen extends StatelessWidget {
         }
 
         if (state is LoginStateSuccess) {
-          // close the progress dialog in the last state
           Navigator.pop(context);
           HomeCubit.get(context).changeIndex(1);
-          // save user access_token
           saveToken(state.token).then((value) {
             if (value) {
               navigateAndFinish(context, HomeScreen());

@@ -44,7 +44,7 @@ class RegisterScreen extends StatelessWidget {
           Navigator.pop(context);
           buildProgressDialog(
             context: context,
-            text: "this account is already exist",
+            text: "This account is already exist",
             error: true,
           );
         }

@@ -1,16 +1,14 @@
 import 'package:courses_workshop/models/courses_model.dart';
 import 'package:courses_workshop/screens/courses/cubit/courses_states.dart';
-import 'package:courses_workshop/shared/components/components.dart';
+import 'package:courses_workshop/shared/network/local/shared_prefs.dart';
 import 'package:courses_workshop/shared/network/remote/dio_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CoursesCubit extends Cubit<CoursesStates> {
-  // create the constructor
   CoursesCubit() : super(CoursesStateInitial());
 
   List<CoursesModel> list = [];
 
-  // create Singleton
   static CoursesCubit get(context) => BlocProvider.of(context);
 
   getCourses() {

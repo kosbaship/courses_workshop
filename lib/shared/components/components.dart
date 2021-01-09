@@ -5,18 +5,7 @@ import 'package:courses_workshop/shared/styles/style.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-SharedPreferences preferences;
-Future<void> initPref() async {
-  preferences = await SharedPreferences.getInstance();
-}
-
-Future<bool> saveToken(String token) => preferences.setString('token', token);
-String getToken() => preferences.getString('token');
-Future<bool> removeToken() => preferences.remove('token');
 
 void initApp() {
   DioHelper();
@@ -290,8 +279,9 @@ Widget drawSettingsCardItem({
 Widget buildExpandedCourseItem({
   @required Function startToday,
   @required String price,
-  @required Widget widget,
+  @required ImageProvider<Object> image,
   @required String title,
+  @required String startDate,
   @required String description,
   bool initiallyExpanded = false,
 }) =>
@@ -312,11 +302,16 @@ Widget buildExpandedCourseItem({
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CircleAvatar(
-              child: widget,
-              radius: 25.0,
-              backgroundColor: kLightishPurpleColor,
-              foregroundColor: kWhiteColor,
+            Container(
+              width: 60.0,
+              height: 60.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  10.0,
+                ),
+                color: kLightishPurpleColor,
+                image: DecorationImage(image: image, fit: BoxFit.fill),
+              ),
             ),
             SizedBox(
               width: 15.0,
@@ -334,23 +329,23 @@ Widget buildExpandedCourseItem({
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      RatingBar.builder(
-                        initialRating: 4,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: false,
-                        itemCount: 5,
-                        itemSize: 12.0,
-                        ignoreGestures: true,
-                        itemPadding: EdgeInsets.zero,
-                        itemBuilder: (context, _) => Icon(
-                          Icons.star,
-                          color: kYellowColor,
-                        ),
-                        onRatingUpdate: (rating) {
-                          print(rating);
-                        },
-                      )
+                      // RatingBar.builder(
+                      //   initialRating: 4,
+                      //   minRating: 1,
+                      //   direction: Axis.horizontal,
+                      //   allowHalfRating: false,
+                      //   itemCount: 5,
+                      //   itemSize: 12.0,
+                      //   ignoreGestures: true,
+                      //   itemPadding: EdgeInsets.zero,
+                      //   itemBuilder: (context, _) => Icon(
+                      //     Icons.star,
+                      //     color: kYellowColor,
+                      //   ),
+                      //   onRatingUpdate: (rating) {
+                      //     print(rating);
+                      //   },
+                      // )
                     ],
                   ),
                   SizedBox(
@@ -376,19 +371,22 @@ Widget buildExpandedCourseItem({
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: 12.0,
+                    ),
                     Row(
                       children: [
                         Expanded(
                           child: writeQuickText(
                             textAlign: TextAlign.start,
-                            text: "32 Lectures",
+                            text: "Starts at",
                             fontSize: 16,
                           ),
                         ),
                         Expanded(
                           child: writeQuickText(
-                            textAlign: TextAlign.end,
-                            text: "64 h, 16 m",
+                            textAlign: TextAlign.start,
+                            text: "$startDate",
                             fontSize: 12,
                           ),
                         ),
@@ -396,122 +394,6 @@ Widget buildExpandedCourseItem({
                     ),
                     SizedBox(
                       height: 12.0,
-                    ),
-                    writeQuickText(
-                        text: "This course includes",
-                        fontSize: 12,
-                        textAlign: TextAlign.start),
-                    SizedBox(
-                      height: 16.0,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.question_answer_outlined,
-                                    size: 20,
-                                    color: kDarkColor,
-                                  ),
-                                  SizedBox(width: 10.0),
-                                  writeQuickText(
-                                    text: "24 Quizzes",
-                                    fontSize: 10,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 10),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.file_copy_outlined,
-                                    size: 20,
-                                    color: kDarkColor,
-                                  ),
-                                  SizedBox(width: 10.0),
-                                  writeQuickText(
-                                    text: "16 Support files",
-                                    fontSize: 10,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 10),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.question_answer_outlined,
-                                    size: 20,
-                                    color: kDarkColor,
-                                  ),
-                                  SizedBox(width: 10.0),
-                                  writeQuickText(
-                                    text: "8 Article",
-                                    fontSize: 10,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.loop_outlined,
-                                    size: 20,
-                                    color: kDarkColor,
-                                  ),
-                                  SizedBox(width: 10.0),
-                                  writeQuickText(
-                                    text: "Full Time Access",
-                                    fontSize: 10,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 10),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.smartphone_outlined,
-                                    size: 20,
-                                    color: kDarkColor,
-                                  ),
-                                  SizedBox(width: 10.0),
-                                  writeQuickText(
-                                    text: "Mobile, Desktop",
-                                    fontSize: 10,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 10),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.format_indent_increase_sharp,
-                                    size: 20,
-                                    color: kDarkColor,
-                                  ),
-                                  SizedBox(width: 10.0),
-                                  writeQuickText(
-                                    text: "Certificate",
-                                    fontSize: 10,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20.0,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

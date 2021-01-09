@@ -3,6 +3,7 @@ import 'package:courses_workshop/screens/register/cubit/register_cubit.dart';
 import 'package:courses_workshop/screens/welcome/welcome_screen.dart';
 import 'package:courses_workshop/shared/colors/common_colors.dart';
 import 'package:courses_workshop/shared/components/components.dart';
+import 'package:courses_workshop/shared/network/local/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -4,6 +4,8 @@ class CoursesModel {
   String title;
   String description;
   String price;
+  String image;
+  String startDate;
 
   CoursesModel({
     this.id,
@@ -11,6 +13,8 @@ class CoursesModel {
     this.title,
     this.description,
     this.price,
+    this.image,
+    this.startDate,
   });
 
   CoursesModel.fromJson(Map<String, dynamic> json) {
@@ -19,5 +23,7 @@ class CoursesModel {
     title = json['title'];
     description = json['description'];
     price = json['price'];
+    image = json['image'];
+    startDate = json['start_date'];
   }
 }

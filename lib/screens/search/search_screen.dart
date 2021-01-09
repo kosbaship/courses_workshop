@@ -94,8 +94,9 @@ class SearchScreen extends StatelessWidget {
                   startToday: () {
                     showToast(message: " Under Developing ", error: false);
                   },
+                  startDate: '2021-01-01',
                   price: 16.99.toString(),
-                  widget: Icon(Icons.work),
+                  image: NetworkImage("http://via.placeholder.com/350x150"),
                   title: "Wordpress",
                   description: "Create your own website from scratch ",
                 ),
@@ -106,8 +107,9 @@ class SearchScreen extends StatelessWidget {
                   startToday: () {
                     showToast(message: " Under Developing ", error: false);
                   },
+                  startDate: '2021-01-01',
                   price: 16.99.toString(),
-                  widget: Icon(Icons.web),
+                  image: NetworkImage("http://via.placeholder.com/350x150"),
                   title: "WebDesign",
                   description:
                       "Become a Web Site that looks great on all devices ",
@@ -119,8 +121,9 @@ class SearchScreen extends StatelessWidget {
                   startToday: () {
                     showToast(message: " Under Developing ", error: false);
                   },
+                  startDate: '2021-01-01',
                   price: 16.99.toString(),
-                  widget: Icon(Icons.eco),
+                  image: NetworkImage("http://via.placeholder.com/350x150"),
                   title: "CSS",
                   description: "Learn CSS for first time will increase",
                 ),
